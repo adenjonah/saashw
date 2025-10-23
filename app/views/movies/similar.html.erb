@@ -1,0 +1,33 @@
+<!-- app/views/movies/similar.html.erb -->
+<h2>Similar Movies for <em><%= @movie.title %></em></h2>
+
+<p>Directed by: <%= @movie.director %></p>
+
+<% if @movies.empty? %>
+  <p>No other movies by this director.</p>
+<% else %>
+  <table class="table table-striped col-md-12">
+    <thead>
+      <tr>
+        <th>Movie Title</th>
+        <th>Rating</th>
+        <th>Director</th>
+        <th>Release Date</th>
+        <th>More Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.rating %></td>
+          <td><%= movie.director %></td>
+          <td><%= movie.release_date %></td>
+          <td><%= link_to "More about #{movie.title}", movie_path(movie) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to 'Back to movie list', movies_path, :class => 'btn btn-primary' %>
